@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Garena Account Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #1f1f1f;
+    padding: 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 15px;
+}
+
+.card {
+    background: #1c1c1c;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: none;
+}
+
+input {
+    background: #2a2a2a;
+    color: white;
+}
+
+button {
+    background: #4caf50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+h3 {
+    margin: 0 0 10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+🔥 Garena Account Tool Dashboard
+</div>
+
+<div class="container">
+
+<!-- Bind Change -->
+<div class="card">
+<h3>1. Bind Change</h3>
+<input id="token" placeholder="Access Token">
+<input id="email" placeholder="New Email">
+<input id="otp" placeholder="OTP">
+<button onclick="bindChange()">Submit Bind Change</button>
+</div>
+
+<!-- Unbind -->
+<div class="card">
+<h3>2. Unbind Email</h3>
+<input id="utoken" placeholder="Access Token">
+<input id="identity" placeholder="Identity Token">
+<button onclick="unbind()">Unbind</button>
+</div>
+
+<!-- Check Bind -->
+<div class="card">
+<h3>3. Check Bind Info</h3>
+<input id="ctoken" placeholder="Access Token">
+<button onclick="checkBind()">Check</button>
+</div>
+
+<!-- Revoke -->
+<div class="card">
+<h3>4. Revoke Token</h3>
+<input id="rtoken" placeholder="Access Token">
+<button onclick="revoke()">Revoke</button>
+</div>
+
+</div>
+
+<script>
+
+const API = "https://YOUR-BACKEND-URL"; // Railway URL daalna
+
+function bindChange(){
+    fetch(API + "/bind-change", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            token: document.getElementById("token").value,
+            email: document.getElementById("email").value,
+            otp: document.getElementById("otp").value
+        })
+    }).then(r=>r.json()).then(d=>{
+        alert(JSON.stringify(d));
+    });
+}
+
+function unbind(){
+    fetch(API + "/unbind", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+            token: document.getElementById("utoken").value,
+            identity: document.getElementById("identity").value
+        })
+    }).then(r=>r.json()).then(d=>{
+        alert(JSON.stringify(d));
+    });
+}
+
+function checkBind(){
+    fetch(API + "/check-bind?token=" + document.getElementById("ctoken").value)
+    .then(r=>r.json()).then(d=>{
+        alert(JSON.stringify(d));
+    });
+}
+
+function revoke(){
+    fetch(API + "/revoke?token=" + document.getElementById("rtoken").value)
+    .then(r=>r.json()).then(d=>{
+        alert(JSON.stringify(d));
+    });
+}
+
+</script>
+
+</body>
+</html>
