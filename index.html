@@ -1,68 +1,64 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bind Checker</title>
+</head>
+<body>
 
-app = FastAPI()
+<h2>🔥 Account Tool</h2>
 
-# ---------------- HOME ----------------
-@app.get("/")
-def home():
-    return {"msg": "Backend is running 🚀"}
+<input id="token" placeholder="Enter Token">
+<input id="email" placeholder="Enter Email">
 
-# ---------------- MODELS ----------------
-class TokenRequest(BaseModel):
-    token: str
+<br><br>
 
-class BindRequest(BaseModel):
-    token: str
-    email: str
+<button onclick="checkToken()">Check</button>
+<button onclick="bindChange()">Bind Change</button>
+<button onclick="unbind()">Unbind</button>
 
-# ---------------- CHECK BUTTON ----------------
-@app.post("/check")
-def check_bind(data: TokenRequest):
+<script>
+const BASE_URL = "https://YOUR-RENDER-URL";
 
-    token = data.token.strip() if data.token else ""
+async function checkToken() {
+    let token = document.getElementById("token").value;
 
-    if not token:
-        return {"status": "error", "msg": "Token missing ❌"}
+    let res = await fetch(BASE_URL + "/check", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({token})
+    });
 
-    if len(token) < 10:
-        return {"status": "invalid", "msg": "Token too short ❌"}
+    let data = await res.json();
+    alert(data.msg);
+}
 
-    return {
-        "status": "success",
-        "msg": "Token valid ✅",
-        "bind": "Email is active",
-        "token": token
-    }
+async function bindChange() {
+    let token = document.getElementById("token").value;
+    let email = document.getElementById("email").value;
 
-# ---------------- BIND CHANGE ----------------
-@app.post("/bind-change")
-def bind_change(data: BindRequest):
+    let res = await fetch(BASE_URL + "/bind-change", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({token, email})
+    });
 
-    token = data.token.strip()
-    email = data.email.strip()
+    let data = await res.json();
+    alert(data.msg);
+}
 
-    if not token or not email:
-        return {"status": "error", "msg": "Missing data ❌"}
+async function unbind() {
+    let token = document.getElementById("token").value;
 
-    return {
-        "status": "success",
-        "msg": "Bind changed successfully ✅",
-        "old_token": token,
-        "new_email": email
-    }
+    let res = await fetch(BASE_URL + "/unbind", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({token})
+    });
 
-# ---------------- UNBIND ----------------
-@app.post("/unbind")
-def unbind(data: TokenRequest):
+    let data = await res.json();
+    alert(data.msg);
+}
+</script>
 
-    token = data.token.strip()
-
-    if not token:
-        return {"status": "error", "msg": "Token missing ❌"}
-
-    return {
-        "status": "success",
-        "msg": "Email unbound successfully ✅",
-        "token": token
-    }
+</body>
+</html>
