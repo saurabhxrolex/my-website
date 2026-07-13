@@ -339,9 +339,7 @@ async function sendWarning(
       text:
         `⚠️ Warning @${number}\n\n` +
         `${reason}\n\n` +
-        `❌ Member ko group se remove nahi kiya gaya.`,
-      mentions: [sender]
-    });
+      
   } catch (error) {
     console.log(
       "Warning failed:",
