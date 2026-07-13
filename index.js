@@ -249,13 +249,6 @@ async function moderateMessage(
   // Admin ke messages delete nahi honge
   if (senderIsAdmin) return false;
 
-  if (!botIsAdmin) {
-    console.log(
-      "Bot admin nahi hai. Message delete nahi ho sakta."
-    );
-
-    return false;
-  }
 
   if (containsLink(text)) {
     const deleted = await deleteMessage(
