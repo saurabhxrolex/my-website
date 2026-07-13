@@ -1,0 +1,16 @@
+{
+  "name": "david-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "David WhatsApp Group Moderation Bot",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "check": "node --check index.js"
+  },
+  "dependencies": {
+    "baileys": "latest",
+    "pino": "latest",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
