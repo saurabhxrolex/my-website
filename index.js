@@ -56,21 +56,17 @@ const BAD_WORDS = [
   "kamina",
   "kutiya",
   "mc",
-  "bc"
+  "bc",
   "madarchood",
-"madrchod",
-"maderchood",
-"madarchod",
-"bhenchoood",
-"behenchoood",
-"gaandu",
-"gaanduu",
-"mc",
-"b.c",
-"m.c",
-"bsdk",
-"mkc",
-"bkl",
+  "madrchod",
+  "maderchood",
+  "bhenchoood",
+  "behenchoood",
+  "gaandu",
+  "gaanduu",
+  "bsdk",
+  "mkc",
+  "bkl"
 ];
 
 /* =========================================
