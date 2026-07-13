@@ -338,8 +338,9 @@ async function sendWarning(
     await sock.sendMessage(groupId, {
       text:
         `⚠️ Warning @${number}\n\n` +
-        `${reason}\n\n` +
-      
+        `${reason}`,
+      mentions: [sender]
+    });
   } catch (error) {
     console.log(
       "Warning failed:",
