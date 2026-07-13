@@ -205,7 +205,8 @@ function normalizeText(text = "") {
     .replace(/5/g, "s")
     .replace(/7/g, "t")
     .replace(/8/g, "b")
-    .replace(/[@._\-*~`'"\s]/g, "");
+    .replace(/[^a-z]/g, "")
+    .replace(/(.)\1+/g, "$1");
 }
 
 function containsBadWord(text) {
